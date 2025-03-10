@@ -13,6 +13,10 @@
             color: white;
             background-color: #7B4BF2;
         }
+        /* مخفی کردن اسکرول پیش‌فرض */
+        .content::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
@@ -189,13 +193,17 @@
             <div class="relative w-8/10 h-122 mx-auto">
                 <div class="absolute w-full h-full z-2 bg-black/60"></div>
                 <div class="absolute w-full h-full bg-linear-[180deg,#2E335A,#1C1B33] z-1 rounded-3xl"></div>
-                <div class="absolute w-full h-full z-3 ">
+                <div class="absolute w-full h-full z-3 scroll-container">
                     <!-- title -->
                     <div class="pb-8 pt-8 w-full text-center text-2xl">
                         <p>نرم افزار های خود را انتخاب کنید</p>
                     </div>
                     <!-- items -->
-                    <div class="px-8 py-6 flex justify-center flex-wrap gap-x-24 gap-y-10 overflow-y-scroll w-full h-90">
+                    <div class="px-8 py-6 flex justify-center flex-wrap gap-x-24 gap-y-10 overflow-y-scroll w-full h-90 content">
+                        <!-- custom scrollbar -->
+                        <div class="custom-scrollbar absolute top-32 right-4 w-1 h-76 bg-[#dddddd69] rounded-lg">
+                            <div class="thumb w-full h-[140px] bg-color-base-3 rounded-lg relative cursor-grab"></div>
+                        </div>
                         <!-- item -->
                         <div class="rounded-lg">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -677,7 +685,51 @@
         let d = new Date();
         let date = d.toLocaleDateString('fa-IR');
         $("header #day").text(days[d.getDay()]);
-        $("header #date").text(date)
+        $("header #date").text(date);
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            //کانتینر اصلی
+            const container = document.querySelector(".scroll-container");
+            const content = document.querySelector(".content");
+            const thumb = document.querySelector(".thumb");
+            const scrollbar = document.querySelector(".custom-scrollbar");
+            //change it , if scroll-height increase (for design)
+            const value = 182 ;
+
+            // محاسبه نسبت بین اسکرول و دسته اسکرول سفارشی
+            function updateThumbPosition() {
+                let scrollRatio = content.scrollTop / (content.scrollHeight - content.clientHeight );
+                let thumbTop = scrollRatio * ((container.clientHeight - value) - thumb.clientHeight);
+                thumb.style.top = thumbTop + "px";
+            }
+
+            // حرکت دسته اسکرول با اسکرول محتوا
+            content.addEventListener("scroll", updateThumbPosition);
+
+            // درگ کردن دسته اسکرول
+            let isDragging = false;
+            let startY, startScrollTop;
+
+            thumb.addEventListener("mousedown", (e) => {
+                isDragging = true;
+                startY = e.clientY;
+                startScrollTop = content.scrollTop;
+                document.body.style.userSelect = "none"; // جلوگیری از انتخاب متن
+            });
+
+            document.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+                let deltaY = e.clientY - startY;
+                let scrollAmount = (deltaY / container.clientHeight) * content.scrollHeight;
+                content.scrollTop = startScrollTop + scrollAmount;
+            });
+
+            document.addEventListener("mouseup", () => {
+                isDragging = false;
+                document.body.style.userSelect = "auto";
+            });
+        });
     </script>
 </body>
 
