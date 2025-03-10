@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: byekan;
+    src: url("../fonts/BYekan/BYekan+.ttf");
+}
+@font-face {
+    font-family: byekanBold;
+    src: url("../fonts/BYekan/BYekan+Bold.ttf");
+}
+@font-face {
+    font-family: byekanBold;
+    src: url("../fonts/Swiss.ttf");
+}
+
+@theme {
+    --font-byekan: byekan ;
+    --font-byekan-bold: byekanBold ;
+    --font-swiss: byekanBold ;
+    --color-color-base: #7B4BF2;
+    --color-color-base-2: #EEA0FF;
+    --color-color-base-3: #EB79FF;
+    --color-box-bg: #131029;
+    --breakpoint-3xl: 112rem;
+}
