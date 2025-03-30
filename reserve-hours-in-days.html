@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GPU Monster</title>
+    <link rel="stylesheet" href="assets/datepicker/mdn.css">
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>
+        .cont .dropdown-menu {
+            position: absolute;
+            z-index: 1000;
+            display: none;
+            min-width: 10rem;
+            padding: .5rem 0;
+            margin: 0;
+
+            color: #212529;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: .25rem;
+        }
+
+        .cont .dropdown-item {
+            display: block;
+            font-size: 1.3rem;
+            width: 100%;
+            padding: .25rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: black !important;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        [data-change-date-button]{
+            display: none;
+        }
+        .cont [data-number] {
+            color: white;
+        }
+        .cont [data-mds-dtp-go-today]{
+            @apply py-16
+        }
+
+        .days tr:first-child {
+            color: #7B4BF2;
+        }
+
+        .cont .text-danger {
+            color: #7B4BF2;
+        }
+
+
+        .cont .border-0 {
+            border: 0 !important;
+        }
+
+        .cont table {
+            caption-side: bottom;
+            border-collapse: collapse;
+        }
+
+        .cont .table > tbody {
+            vertical-align: inherit;
+        }
+
+        .cont [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+            cursor: pointer;
+        }
+
+        .cont button, input, optgroup, select, textarea {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .cont .w-100 {
+            width: 100% !important;
+        }
+
+        .cont .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #dee2e6;
+        }
+
+        .cont .text-center {
+            text-align: center !important;
+        }
+
+        .cont .p-0 {
+            padding: 0 !important;
+        }
+
+        .cont .m-0 {
+            margin: 0 !important;
+        }
+
+        .cont tbody, td, tfoot, th, thead, tr {
+            border-color: inherit;
+            border-style: solid;
+            border-width: 0;
+        }
+
+        .cont .btn {
+            display: inline-block;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            background-color: transparent;
+            border: 1px solid transparent;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            border-radius: .25rem;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        .cont .btn-light {
+            color: #000;
+            background-color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .cont [data-td-month] tr td table tr th button {
+            padding: 8px 0 !important;
+        }
+
+        .cont .dropdown, .dropend, .dropstart, .dropup {
+            position: relative;
+        }
+
+        .MonthChoise{
+            color: #A800C6;
+            font-size: 20px !important;
+            margin-top: 10px !important;
+        }
+        .YearsChoise{
+            color: #A800C6;
+            font-size: 20px !important;
+            margin-top: 10px !important;
+        }
+
+
+        .time-picker {
+            display: flex;
+            align-items: center;
+            /* background: #111; */
+            padding: 20px;
+            border-radius: 10px;
+            /* box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); */
+            width: 100%;
+            height: 20rem;
+            /* margin-inline: 4rem; */
+        }
+
+        .picker {
+            width: 100%;
+            height: 100%;
+            /* width: 80px;
+            height: 120px; */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scroll-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .scroll-list li {
+            padding: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: all 0.5s;
+        }
+
+        .scroll-list li.selected {
+            opacity: 1;
+            font-weight: bold;
+            color: #EB79FF;
+            scale: 1.5;
+        }
+
+        .colon {
+            font-size: 30px;
+            margin: 0 15px;
+        }
+        #minute-list:first-child , 
+        #hour-list:first-child,
+        #minute-list-end:first-child , 
+        #hour-list-end:first-child{
+            margin-top: 7.5rem;
+        }
+
+        #t-smail{
+            position: absolute;
+            bottom: -10px;
+            right: 22px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body class="bg-[#040712] font-byekan mx-auto overflow-x-hidden relative">
+<script>
+    //zoom screen
+    if (window.innerWidth <= 1660) {
+        document.body.style.zoom = "85%"
+    }
+</script>
+<div class="fixed opacity-40 top-0 left-0 bg-[url(../media/starsImage.svg)] w-full h-screen mix-blend-color-dodge -z-1"></div>
+
+<!--Header & Navbar & logo -->
+<header class="w-full text-lg 2xl:text-xl">
+    <section class="w-full flex justify-between items-center text-white py-14 px-6 2xl:px-18" dir="rtl">
+        <!--sign up & sign in-->
+        <div class="flex items-center relative" dir="rtl">
+            <div class="bg-[#7B4BF2] px-8 py-2.5 rounded-[8px] flex justify-center items-center">
+                <a href="#" class="">مرتضی بحری</a>
+            </div>
+            <div class="px-8 py-1.5 text-color-base rounded-[8px] flex justify-center items-center text-sm gap-x-4">
+                <p>GPU Randering</p>
+            </div>
+            <div class="absolute top-16 right-12">
+                <span>5000</span>
+                <span>تومان</span>
+            </div>
+        </div>
+        <!--Navbar-->
+        <nav class="relative">
+            <div class="ml-28 py-1 px-6 lg:px-14 bg-white/7 border border-white/33 rounded-3xl flex justify-evenly gap-x-7 lg:gap-x-9 xl:gap-x-16 2xl:py-2">
+                <!-- {bg-color-base px-2 rounded-xl} -> selection class in navbar  -->
+                <div class="">
+                    <button class="btn cursor-pointer">
+                        <a href="reserve-hours.html">انتخاب ساعتی</a>
+                    </button>
+                </div>
+                <div class="">
+                    <button class="btn cursor-pointer">
+                        <a href="reserve-days.html">انتخاب چند روز</a>
+                    </button>
+                </div>
+                <div class="bg-color-base px-3 rounded-xl">
+                    <button class="btn cursor-pointer">
+                        <a href="reserve-hours-in-days.html">انتخاب ساعتی در چند روز</a>
+                    </button>
+                </div>
+            </div>
+            <div class="absolute top-12 2xl:top-14 left-0 w-full text-center text-color-base flex justify-center items-center gap-x-4 ml-16"
+                    dir="rtl">
+                <p id="day">یک شنبه</p>
+                <p id="date">1403/12/16</p>
+            </div>
+        </nav>
+        <!--logo-->
+        <div class="">
+            <svg width="111" height="50" viewBox="0 0 111 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_45_425)">
+                    <path
+                            d="M31.1628 13.8374C32.2498 13.8374 33.097 14.2877 33.6967 15.1884C34.2964 16.0891 34.4838 17.1753 34.2589 18.4469L31.7776 32.2137C31.5377 33.5118 30.9529 34.6156 30.0234 35.5164C29.0938 36.4259 28.0592 36.8939 26.9123 36.9204L3.61284 36.9381C2.48835 36.9381 1.61875 36.4701 0.996531 35.534C0.374314 34.598 0.179402 33.4677 0.419293 32.1519L3.7178 13.8374H11.5592L9.38522 25.9175C9.29527 26.4121 9.36273 26.8271 9.59513 27.1715C9.82752 27.5159 10.1499 27.6837 10.5547 27.6837H23.3814C23.7562 27.6837 24.101 27.5247 24.4309 27.2156C24.7533 26.8977 24.9557 26.5269 25.0381 26.0853L25.293 24.6813C25.3755 24.2397 25.308 23.86 25.0981 23.551C24.8882 23.2331 24.5958 23.0829 24.221 23.0829H17.7439L19.4082 13.8462H31.1778H31.1628V13.8374ZM4.5949 8.90991C4.88727 7.27626 5.50199 5.79273 6.42407 4.44165C7.34615 3.09058 8.45565 2.01325 9.75256 1.2185C11.0495 0.423753 12.3839 0.0175476 13.7632 0.0175476H37.5799L35.9157 9.2543H4.54992L4.6024 8.90991H4.5949Z"
+                            fill="#A800C6"/>
+                    <path
+                            d="M66.1494 0.000560284C67.6487 0.000560284 68.9307 0.424427 70.0027 1.28099C71.0747 2.13755 71.8393 3.28552 72.3041 4.73373C72.7689 6.18194 72.8439 7.7891 72.5215 9.55521L71.8094 13.5466C71.4945 15.3127 70.8348 16.9111 69.8452 18.3593C68.8557 19.7986 67.6712 20.9555 66.2919 21.812C64.9125 22.6774 63.4731 23.1013 61.9813 23.1013H46.5908L44.0869 36.9476H36.208L40.3911 13.8027H48.27L48.255 13.8469H62.2362C62.701 13.8469 63.1283 13.6526 63.5256 13.264C63.9229 12.8755 64.1703 12.4075 64.2753 11.86L64.3952 11.2154C64.4852 10.6679 64.3952 10.1998 64.1478 9.8113C63.9004 9.42276 63.5331 9.22848 63.0683 9.22848H41.2082L42.895 -0.00827026H66.1494V0.000560284Z"
+                            fill="#A800C6"/>
+                    <path
+                            d="M94.7778 22.774L98.8934 0H106.75L102.552 23.2243C102.094 25.7587 101.157 28.0723 99.7256 30.1563C98.2937 32.2403 96.5845 33.9005 94.5979 35.1367C92.6113 36.373 90.5347 36.9912 88.3832 36.9912H84.2526C82.1086 36.9912 80.2644 36.373 78.7126 35.1367C77.1683 33.9005 76.0513 32.2403 75.3766 30.1563C74.7019 28.0723 74.5895 25.7587 75.0468 23.2243L79.2299 0H87.0863L82.9857 22.7652C82.7383 24.1427 82.9407 25.3172 83.5929 26.2797C84.2451 27.2511 85.1522 27.7279 86.3216 27.7279H89.6576C90.8271 27.7279 91.9066 27.2422 92.9037 26.2797C93.9007 25.3083 94.5229 24.1427 94.7778 22.7652V22.774Z"
+                            fill="#A800C6"/>
+                </g>
+                <path
+                        d="M2.80734 49V41.5902H0.135542V40.6877H6.4766V41.5902H3.80481V49H2.80734ZM7.74589 49V40.6877H8.74336V44.3808H12.6382V40.6877H13.6357V49H12.6382V45.2832H8.74336V49H7.74589ZM15.5386 49V40.6877H20.6566V41.5902H16.5361V44.3689H20.3241V45.2714H16.5361V48.0975H20.716V49H15.5386ZM27.4526 49.1662C26.6372 49.1662 25.992 48.9367 25.517 48.4775C25.05 48.0184 24.8164 47.3613 24.8164 46.5063V45.8651H25.802V46.5063C25.802 47.0209 25.9366 47.4405 26.2058 47.765C26.4828 48.0896 26.8945 48.2519 27.4407 48.2519C27.9949 48.2519 28.3867 48.0936 28.6163 47.7769C28.8459 47.4523 28.9607 47.0288 28.9607 46.5063V41.5902H27.5001V40.6877H30.8606V41.5902H29.9582V46.5063C29.9582 47.3692 29.7444 48.0302 29.3169 48.4894C28.8894 48.9406 28.268 49.1662 27.4526 49.1662ZM35.1839 49.1662C34.1944 49.1662 33.4027 48.8813 32.809 48.3113C32.2232 47.7334 31.9303 46.8942 31.9303 45.7938V43.8939C31.9303 42.7935 32.2232 41.9583 32.809 41.3884C33.4027 40.8105 34.1944 40.5215 35.1839 40.5215C36.1814 40.5215 36.973 40.8105 37.5589 41.3884C38.1526 41.9583 38.4495 42.7935 38.4495 43.8939V45.7938C38.4495 46.8942 38.1526 47.7334 37.5589 48.3113C36.973 48.8813 36.1814 49.1662 35.1839 49.1662ZM35.1839 48.2756C35.9043 48.2756 36.4624 48.0619 36.8582 47.6344C37.2541 47.199 37.452 46.5974 37.452 45.8295V43.8583C37.452 43.0904 37.2541 42.4927 36.8582 42.0652C36.4624 41.6298 35.9043 41.4121 35.1839 41.4121C34.4714 41.4121 33.9173 41.6298 33.5215 42.0652C33.1257 42.4927 32.9277 43.0904 32.9277 43.8583V45.8295C32.9277 46.5974 33.1257 47.199 33.5215 47.6344C33.9173 48.0619 34.4714 48.2756 35.1839 48.2756ZM41.9596 49V45.8295L39.0028 40.6877H40.1428L42.3752 44.6776H42.5415L44.7739 40.6877H45.9139L42.9571 45.8295V49H41.9596ZM52.9495 49.1662C51.9599 49.1662 51.1683 48.8813 50.5746 48.3113C49.9888 47.7334 49.6959 46.8942 49.6959 45.7938V43.8939C49.6959 42.7935 49.9888 41.9583 50.5746 41.3884C51.1683 40.8105 51.9599 40.5215 52.9495 40.5215C53.947 40.5215 54.7386 40.8105 55.3244 41.3884C55.9182 41.9583 56.215 42.7935 56.215 43.8939V45.7938C56.215 46.8942 55.9182 47.7334 55.3244 48.3113C54.7386 48.8813 53.947 49.1662 52.9495 49.1662ZM52.9495 48.2756C53.6699 48.2756 54.228 48.0619 54.6238 47.6344C55.0196 47.199 55.2176 46.5974 55.2176 45.8295V43.8583C55.2176 43.0904 55.0196 42.4927 54.6238 42.0652C54.228 41.6298 53.6699 41.4121 52.9495 41.4121C52.237 41.4121 51.6829 41.6298 51.2871 42.0652C50.8912 42.4927 50.6933 43.0904 50.6933 43.8583V45.8295C50.6933 46.5974 50.8912 47.199 51.2871 47.6344C51.6829 48.0619 52.237 48.2756 52.9495 48.2756ZM57.8768 49V40.6877H62.8998V41.5902H58.8743V44.3808H62.5792V45.2832H58.8743V49H57.8768ZM66.9476 49V48.1094H68.1113V41.5783H66.9476V40.6877H70.1894C71.2818 40.6877 72.1249 40.9648 72.7187 41.519C73.3203 42.0731 73.6211 42.9241 73.6211 44.072V45.6157C73.6211 46.7715 73.3203 47.6265 72.7187 48.1806C72.1249 48.7269 71.2818 49 70.1894 49H66.9476ZM69.1088 48.0975H70.1894C70.9968 48.0975 71.6064 47.8996 72.018 47.5038C72.4297 47.108 72.6355 46.4945 72.6355 45.6632V44.0364C72.6355 43.1893 72.4297 42.5719 72.018 42.184C71.6064 41.796 70.9968 41.6021 70.1894 41.6021H69.1088V48.0975ZM75.2133 49V40.6877H80.3313V41.5902H76.2108V44.3689H79.9988V45.2714H76.2108V48.0975H80.3907V49H75.2133ZM84.6712 49.1662C84.0696 49.1662 83.5313 49.0594 83.0563 48.8456C82.5813 48.6319 82.2053 48.3113 81.9282 47.8838C81.659 47.4484 81.5244 46.9061 81.5244 46.257V46.0076H82.51V46.257C82.51 46.9457 82.7119 47.4603 83.1156 47.8007C83.5194 48.1332 84.0379 48.2994 84.6712 48.2994C85.3204 48.2994 85.8151 48.1529 86.1556 47.86C86.496 47.5671 86.6662 47.199 86.6662 46.7557C86.6662 46.447 86.587 46.2015 86.4287 46.0195C86.2783 45.8374 86.0645 45.6909 85.7874 45.5801C85.5104 45.4614 85.1858 45.3584 84.8137 45.2714L84.1962 45.117C83.7133 44.9903 83.2858 44.836 82.9138 44.6539C82.5417 44.4718 82.2488 44.2343 82.0351 43.9414C81.8292 43.6406 81.7263 43.2566 81.7263 42.7896C81.7263 42.3225 81.8411 41.9188 82.0707 41.5783C82.3082 41.2379 82.6367 40.9767 83.0563 40.7946C83.4838 40.6125 83.9746 40.5215 84.5287 40.5215C85.0908 40.5215 85.5935 40.6205 86.0368 40.8184C86.488 41.0084 86.8403 41.2934 87.0937 41.6733C87.3549 42.0454 87.4855 42.5164 87.4855 43.0864V43.5852H86.4999V43.0864C86.4999 42.6827 86.4128 42.3581 86.2387 42.1127C86.0724 41.8673 85.8389 41.6852 85.5381 41.5665C85.2452 41.4477 84.9087 41.3884 84.5287 41.3884C83.9825 41.3884 83.5431 41.5111 83.2106 41.7565C82.8782 41.994 82.7119 42.3344 82.7119 42.7777C82.7119 43.0706 82.7832 43.3081 82.9257 43.4902C83.0681 43.6722 83.27 43.8227 83.5313 43.9414C83.7925 44.0522 84.1052 44.1512 84.4694 44.2383L85.0868 44.3926C85.5697 44.4956 86.0012 44.638 86.3812 44.8201C86.7691 44.9943 87.0778 45.2357 87.3074 45.5445C87.537 45.8453 87.6518 46.2411 87.6518 46.7319C87.6518 47.2228 87.5291 47.6502 87.2836 48.0144C87.0382 48.3786 86.6899 48.6636 86.2387 48.8694C85.7954 49.0673 85.2729 49.1662 84.6712 49.1662ZM89.1869 49V40.6877H90.1844V49H89.1869ZM94.9834 49.1662C94.3659 49.1662 93.8197 49.0396 93.3447 48.7863C92.8777 48.525 92.5095 48.145 92.2404 47.6463C91.9791 47.1476 91.8485 46.5301 91.8485 45.7938V43.8939C91.8485 42.7935 92.1414 41.9583 92.7272 41.3884C93.3131 40.8105 94.1007 40.5215 95.0903 40.5215C96.0719 40.5215 96.82 40.7907 97.3346 41.329C97.8492 41.8673 98.1065 42.5877 98.1065 43.4902V43.5495H97.1209V43.4664C97.1209 43.0706 97.0496 42.7183 96.9071 42.4096C96.7646 42.1008 96.543 41.8594 96.2421 41.6852C95.9413 41.5031 95.5574 41.4121 95.0903 41.4121C94.3857 41.4121 93.8355 41.6298 93.4397 42.0652C93.0439 42.4927 92.846 43.0943 92.846 43.8702V45.8176C92.846 46.5934 93.0439 47.199 93.4397 47.6344C93.8355 48.0619 94.3897 48.2756 95.1022 48.2756C95.7988 48.2756 96.3094 48.0777 96.634 47.6819C96.9665 47.2861 97.1327 46.7597 97.1327 46.1026V45.9007H94.6153V45.0457H98.1065V49H97.204V48.0975H97.0377C96.9507 48.2717 96.828 48.4419 96.6696 48.6081C96.5113 48.7744 96.2976 48.909 96.0284 49.0119C95.7592 49.1148 95.4109 49.1662 94.9834 49.1662ZM99.9251 49V40.6877H101.861L104.758 48.3706H104.912V40.6877H105.898V49H103.963L101.077 41.3052H100.911V49H99.9251Z"
+                        fill="#7B4BF2"/>
+                <defs>
+                    <clipPath id="clip0_45_425">
+                        <rect width="106.429" height="37" fill="white" transform="translate(0.322098)"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+    </section>
+</header>
+
+<main class="w-full flex justify-center pt-24" dir="rtl">
+    <!-- datepicker -->
+    <section class="w-full text-white py-4 min-xl:px-4 select-none">
+        <div class="px-8 rounded-4xl">
+            <div id="cont" class="cont mx-auto font-morabba pb-10 pt-8 px-8 rounded-4xl bg-box-bg " style="position: relative">
+                <input data-name="mainInput" id="datePic" class="invisible" style="visibility: hidden;position: absolute">
+                <div id="dtp1" class="overflow-visible"></div>
+            </div>
+        </div>
+    </section>
+    <!-- timepicker -->
+    <section class="w-full text-white py-4 min-xl:px-4 select-none">
+        <div class="px-8 rounded-4xl">
+            <div class="cont mx-auto font-morabba pb-8 px-8 rounded-4xl relative bg-box-bg">
+                <div id="timePicker" style="display: none;" class="w-full flex flex-col justify-center items-center relative">
+                    <div class="pt-8 pb-4 px-12 border-b border-color-base-2">
+                        <p class="text-2xl ">شروع</p>
+                    </div>
+                    <div class="time-picker" dir="ltr">
+                        <div class="picker">
+                            <ul id="hour-list" class="scroll-list"></ul>
+                            <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8  rounded-3xl">
+                                <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8 rounded-3xl">
+                                    <div id="t-smail">ساعت</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="colon h-[280px] relative flex justify-center items-center">
+                            <div class="flex flex-col gap-y-2">
+                                <div class="bg-white rounded-full size-2"></div>
+                                <div class="bg-white rounded-full size-2"></div>
+                            </div>
+                            <div class="absolute bottom-0 -right-12 z-2">
+                                <button class="bg-color-base px-8 py-2 rounded-lg" style="font-size: 0.75rem;" onclick="approvedStartTime()">تایید</button>
+                            </div>
+                        </div>
+                        <div class="picker">
+                            <ul id="minute-list" class="scroll-list"></ul>
+                            <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8 rounded-3xl">
+                                <div id="t-smail">دقیقه</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="timePickerEnd" style="display: none;" class="w-full flex flex-col justify-center items-center relative">
+                    <div class="pt-8 pb-4 px-12 border-b border-color-base-2">
+                        <p class="text-2xl ">پایان</p>
+                    </div>
+                    <div class="time-picker" dir="ltr">
+                        <div class="picker">
+                            <ul id="hour-list-end" class="scroll-list"></ul>
+                            <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8  rounded-3xl">
+                                <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8 rounded-3xl">
+                                    <div id="t-smail">ساعت</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="colon h-[280px] relative flex justify-center items-center">
+                            <div class="flex flex-col gap-y-2">
+                                <div class="bg-white rounded-full size-2"></div>
+                                <div class="bg-white rounded-full size-2"></div>
+                            </div>
+                            <div class="absolute bottom-0 -right-12 z-2">
+                                <button class="bg-color-base px-8 py-2 rounded-lg" style="font-size: 0.75rem;"  onclick="approvedEndTime()">تایید</button>
+                            </div>
+                        </div>
+                        <div class="picker">
+                            <ul id="minute-list-end" class="scroll-list"></ul>
+                            <div class="absolute top-[51%] left-[50%] translate-x-[-50%] translate-y-[-50%] pointer-events-none border border-gray-600 px-24 py-8 rounded-3xl">
+                                <div id="t-smail">دقیقه</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="selectTimes" class=" w-full h-[400px] flex flex-col justify-center items-center">
+                    <div class="">
+                        <div class="flex justify-between gap-x-4">
+                            <!-- starting -->
+                            <div class="flex flex-col gap-y-4">
+                                <p class="text-sm text-center">شروع</p>
+                                <input class="cursor-pointer py-4 w-60 rounded-3xl border border-gray-500 text-center text-color-base-2" readonly type="text"  value="00:00" style="font-size: 2rem;" onclick="fadeAndToggleElements('#selectTimes' , '#timePicker')" id="inputStart">
+                            </div>
+                            <!-- ending -->
+                            <div class="flex flex-col gap-y-4">
+                                <p class="text-sm text-center">پایان</p>
+                                <input class="cursor-pointer py-4 w-60 rounded-3xl border border-gray-500 text-center text-color-base-2" readonly type="text"  value="00:00" style="font-size: 2rem;" onclick="fadeAndToggleElements('#selectTimes' , '#timePickerEnd')" id="inputEnd">
+                            </div>
+                        </div>
+                        <div class="mt-8 w-full flex justify-center">
+                            <button class="w-8/12 rounded-lg px-10 py-2 bg-color-base" onclick="appendDateSelectedElem()">تایید</button>
+                        </div>
+                        <p class="text-red-900 text-center mt-4" id="errorElem"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full pt-8 px-8">
+            <div class="min-w-[520px] max-w-[774px] h-auto min-h-32 mx-auto rounded-4xl bg-box-bg-2">
+                <div class="w-full flex gap-6 px-4 py-4 flex-wrap" id="dateSelectedItems">
+                    <!-- items -->
+                    <div class="hidden min-w-[358px] max-w-[358px] bg-color-base rounded-2xl px-6 py-3 flex-col justify-center items-center relative itemSelected noNeedElem">
+                        <div class="text-color-base-2 text-2xl mb-4 font-bold tracking-[1.5px]">
+                            <div class="flex gap-x-3">
+                                <p class="dateFrom">1404/02/10</p>
+                                <p>تا</p>
+                                <p class="dateTo">1404/02/15</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-x-4">
+                            <p class="text-color-base-2 sTime">00:00</p>
+                            <p class="text-color-base-2">تا</p>
+                            <p class="text-color-base-2 eTime">23:59</p>
+                        </div>
+                        <div class="absolute right-1 bottom-1 size-8" onclick="deleteItemSelected(this)">
+                            <svg class="w-full h-full stroke-color-base-3 cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 12V17" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 12V17" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 7H20" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="w-full gap-x-4 py-24 flex justify-center items-center text-lg" dir="rtl">
+    <div class="">
+        <button class="bg-color-base px-4 py-2 rounded-lg text-white" onclick="approvedItemSelected()">ثبت</button>
+    </div>
+    <div class="">
+        <a href="#" class="bg-color-base px-4 py-2 rounded-lg text-white">سرویس جدید</a>
+    </div>
+</footer>
+
+
+<script src="assets/jquery/jquury3.7.1.min.js"></script>
+<script src="assets/scripts/scripts.js"></script>
+<script src="assets/datepicker/mdn.js"></script>
+
+<script>
+$(".noNeedElem").remove()
+let data = {
+    date : {
+        from : "",
+        to : ""
+    },
+    sTime : "",
+    eTime : ""
+}
+//TimePicker
+let startIndex = 0;
+$("#datePic").on("change" ,()=>{
+    if (startIndex === 0) {startIndex++ ; return};
+    let value = $("#datePic").val().split("-" , 2);
+    data.date.from = value[0];
+    data.date.to = value[1];
+})
+function approvedStartTime(){
+    const startTimeMins = document.querySelector('#timePicker #minute-list .selected').textContent;
+    const startTimeHours = document.querySelector('#timePicker #hour-list .selected').textContent;
+    let val = startTimeHours + ":" + startTimeMins;
+    $("#inputStart").val(val);
+    data.sTime = val;
+    fadeAndToggleElements("#timePicker" , "#selectTimes");
+}
+function approvedEndTime(){
+    const endTimeMins = document.querySelector('#timePickerEnd #minute-list-end .selected').textContent;
+    const endTimeHours = document.querySelector('#timePickerEnd #hour-list-end .selected').textContent;
+    let val = endTimeHours + ":" + endTimeMins;
+    $("#inputEnd").val(val);
+    data.eTime = val;
+    fadeAndToggleElements("#timePickerEnd" , "#selectTimes")
+}
+function appendDateSelectedElem(){
+    
+    const containerElem = document.getElementById("dateSelectedItems");
+    const firstDate = new Date(`2025-01-01T${$("#inputStart").val()}`)
+    const secondDate = new Date(`2025-01-01T${$("#inputEnd").val()}`)
+    const errorElem = document.getElementById("errorElem");
+    errorElem.textContent = "";
+    //check all empty errors
+    if(empty(data.date.from) || empty(data.date.to) || empty(data.sTime) || empty(data.eTime) || secondDate <= firstDate) { errorElem.textContent = "مقادیر بدردستی تعیین نشده اند!"; return };
+
+    $(containerElem).append(`
+                    <div class="min-w-[358px] max-w-[358px] bg-color-base rounded-2xl px-6 py-3 flex-col justify-center items-center relative itemSelected">
+                        <div class="text-color-base-2 text-2xl mb-4 font-bold tracking-[1.5px]">
+                            <div class="flex gap-x-3">
+                                <p class="dateFrom">${data.date.from}</p>
+                                <p>تا</p>
+                                <p class="dateTo">${data.date.to}</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-x-4">
+                            <p class="text-color-base-2 sTime">${data.sTime}</p>
+                            <p class="text-color-base-2">تا</p>
+                            <p class="text-color-base-2 eTime">${data.eTime}</p>
+                        </div>
+                        <div class="absolute right-1 bottom-1 size-8" onclick="deleteItemSelected(this)">
+                            <svg class="w-full h-full stroke-color-base-3 cursor-pointer" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 12V17" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 12V17" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 7H20" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+    `);
+
+    errorElem.textContent = "";
+
+}
+//delete element
+function deleteItemSelected(e){
+
+    const box = e.parentNode;
+    box.remove()
+    
+}
+//approved data
+function approvedItemSelected(){
+    const items = document.querySelectorAll(".itemSelected");
+    const sendData = [];
+    items.forEach((item , i) => {
+        sendData[i] = {
+            date : {
+                from : items[i].querySelector(".dateFrom").textContent,
+                to : items[i].querySelector(".dateTo").textContent
+            },
+            sTime : items[i].querySelector(".sTime").textContent,
+            eTime : items[i].querySelector(".eTime").textContent
+        }
+    })
+    
+    //SEND DATA
+    console.log(JSON.stringify(sendData));
+    
+}
+
+//DtaePicekr
+document.addEventListener("DOMContentLoaded", function () {
+
+    //show date
+    let days = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
+    let d = new Date();
+    let date = d.toLocaleDateString('fa-IR');
+    $("header #day").text(days[d.getDay()]);
+    $("header #date").text(date);
+
+
+    const dtp1Instance = new mds.MdsPersianDateTimePicker(document.getElementById('dtp1'), {
+        targetTextSelector: '[data-name="mainInput"]',
+        rangeSelector: true,
+        inLine: true,
+        // disableBeforeToday : true,
+        yearOffset: 10,
+
+    });
+
+    // style first & last elem in datepicker
+     document.getElementById("cont").addEventListener("click", () => {
+         let selected = document.querySelectorAll(".selected-range-days-start-end");
+         if (selected.length !== 0) {
+             selected[0].style.borderTopRightRadius = "2rem";
+             selected[0].style.borderBottomRightRadius = "2rem";
+             if (selected.length === 2) {
+                 selected[1].style.borderTopLeftRadius = "2rem";
+                 selected[1].style.borderBottomLeftRadius = "2rem";
+             }
+         }
+     })
+
+    
+    const hourList = document.getElementById("hour-list");
+    const minuteList = document.getElementById("minute-list");
+    const hourListEnd = document.getElementById("hour-list-end");
+    const minuteListEnd = document.getElementById("minute-list-end");
+
+    function createTimeList(element, range, step = 1) {
+        for (let i = 0; i < range; i += step) {
+            const li = document.createElement("li");
+            li.textContent = i.toString().padStart(2, "0");
+            li.addEventListener("click", () => selectItem(element, li));
+            element.appendChild(li);
+        }
+        selectItem(element, (element.children[7]) ?? element.children[1]); // default : 07:30
+    }
+
+    function selectItem(parent, item) {
+        Array.from(parent.children).forEach(li => li.classList.remove("selected"));
+        item.classList.add("selected");
+
+        const index = Array.from(parent.children).indexOf(item);
+        parent.style.transform = `translateY(${-index * 56}px)`;
+        
+    }
+
+    function scrollHandler(event, element) {
+        // event.preventDefault();
+        let items = Array.from(element.children);
+        let selectedIndex = items.findIndex(li => li.classList.contains("selected"));
+
+        if (event.deltaY > 0 || event.key === "ArrowDown") {
+            if (selectedIndex < items.length - 1) selectItem(element, items[selectedIndex + 1]);
+        } else if (event.deltaY < 0 || event.key === "ArrowUp") {
+            if (selectedIndex > 0) selectItem(element, items[selectedIndex - 1]);
+        }
+    }
+
+    //scrolling 
+    hourList.addEventListener("wheel", (event) => scrollHandler(event, hourList));
+    minuteList.addEventListener("wheel", (event) => scrollHandler(event, minuteList));
+    hourListEnd.addEventListener("wheel", (event) => scrollHandler(event, hourListEnd));
+    minuteListEnd.addEventListener("wheel", (event) => scrollHandler(event, minuteListEnd));
+
+    // touching
+    // function addTouchSwipe(element) {
+    //     let startY = 0;
+
+    //     element.addEventListener("touchstart", (event) => {
+    //         startY = event.touches[0].clientY;
+    //     });
+
+    //     element.addEventListener("touchmove", (event) => {
+    //         let deltaY = event.touches[0].clientY - startY;
+
+    //         if (deltaY > 20) {
+    //             scrollHandler({ deltaY: -1 }, element);
+    //             startY = event.touches[0].clientY;
+    //         } else if (deltaY < -20) {
+    //             scrollHandler({ deltaY: 1 }, element);
+    //             startY = event.touches[0].clientY;
+    //         }
+    //     });
+    // }
+
+    // addTouchSwipe(hourList);
+    // addTouchSwipe(minuteList);
+    // addTouchSwipe(hourListEnd);
+    // addTouchSwipe(minuteListEnd);
+
+    createTimeList(hourList, 24);
+    createTimeList(minuteList, 60, 15);
+    createTimeList(hourListEnd, 24);
+    createTimeList(minuteListEnd, 60, 15);
+
+            
+});
+
+</script>
+</body>
+
+</html>

@@ -8,16 +8,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GPU Monster</title>
     <link rel="stylesheet" href="assets/styles/main.css">
-    <style>
-        ::selection {
-            color: white;
-            background-color: #7B4BF2;
-        }
-    </style>
 </head>
 
 <body class="bg-[#040712] font-byekan mx-auto overflow-x-hidden relative">
-
+<script>
+    //zoom screen
+    if (window.innerWidth <= 1660) {
+        document.body.style.zoom = "85%"
+    }
+</script>
     <div class="fixed opacity-40 top-0 left-0 bg-[url(../media/starsImage.svg)] w-full h-screen mix-blend-color-dodge -z-1"></div>
 
     <!--Header & Navbar & logo -->
@@ -1935,6 +1934,7 @@
     </main>
 
     <script src="assets/jquery/jquury3.7.1.min.js"></script>
+    <script src="assets/scripts/scripts.js"></script>
     <script>
         //show date
         let days = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
@@ -1942,6 +1942,11 @@
         let date = d.toLocaleDateString('fa-IR');
         $("header #day").text(days[d.getDay()]);
         $("header #date").text(date)
+
+        //zoom screen
+        if (window.innerWidth <= 1660){
+            document.body.style.zoom = "85%"
+        }
     </script>
 </body>
 

@@ -3,28 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GPU Monster</title>
     <link rel="stylesheet" href="assets/styles/main.css">
-    <style>
-        ::selection {
-            color: white;
-            background-color: #7B4BF2;
-        }
-        /* مخفی کردن اسکرول پیش‌فرض */
-        .content::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
 </head>
 
 <body class="bg-[#040712] font-byekan mx-auto overflow-x-hidden relative">
-
-    <div
-        class="fixed opacity-40 top-0 left-0 bg-[url(../media/starsImage.svg)] w-full h-screen mix-blend-color-dodge -z-1">
-    </div>
+<script>
+    //zoom screen
+    if (window.innerWidth <= 1660) {
+        document.body.style.zoom = "85%"
+    }
+</script>
+    <div class="fixed opacity-40 top-0 left-0 bg-[url(../media/starsImage.svg)] w-full h-screen mix-blend-color-dodge -z-1"></div>
 
     <!--Header & Navbar & logo -->
     <header class="w-full text-lg 2xl:text-xl">
@@ -87,7 +79,7 @@
                 <!--items-->
                 <div class="w-full flex justify-center px-8 lg:px-24 xl:px-32 2xl:px-42 gap-x-2 lg:gap-x-10 xl:gap-x-22  gap-y-12 flex-wrap " dir="rtl">
                     <!--item-->
-                    <div class="w-104 rounded-3xl bg-box-bg text-white border">
+                    <div class="w-104 rounded-3xl bg-box-bg text-white border service" data-service="service1">
                         <!--name-->
                         <div class="w-full mt-8">
                             <p class="w-full text-xl text-center text-gray-500">سرویس شماره 1</p>
@@ -117,7 +109,7 @@
                         </div>
                     </div>
                     <!--item-->
-                    <div class="w-104 rounded-3xl bg-box-bg text-white border">
+                    <div class="w-104 rounded-3xl bg-box-bg text-white border service" data-service="service3">
                         <!--name-->
                         <div class="w-full mt-8">
                             <p class="w-full text-xl text-center text-gray-500">سرویس شماره 1</p>
@@ -147,7 +139,7 @@
                         </div>
                     </div>
                     <!--item-->
-                    <div class="w-104 rounded-3xl bg-box-bg text-white border">
+                    <div class="w-104 rounded-3xl bg-box-bg text-white border service" data-service="service2">
                         <!--name-->
                         <div class="w-full mt-8">
                             <p class="w-full text-xl text-center text-gray-500">سرویس شماره 1</p>
@@ -199,13 +191,13 @@
                         <p>نرم افزار های خود را انتخاب کنید</p>
                     </div>
                     <!-- items -->
-                    <div class="px-8 py-6 flex justify-center flex-wrap gap-x-24 gap-y-10 overflow-y-scroll w-full h-90 content">
+                    <div class="items px-8 py-6 flex justify-center flex-wrap gap-x-24 gap-y-10 overflow-y-scroll w-full h-90 content">
                         <!-- custom scrollbar -->
                         <div class="custom-scrollbar absolute top-32 right-4 w-1 h-76 bg-[#dddddd69] rounded-lg">
                             <div class="thumb w-full h-[140px] bg-color-base-3 rounded-lg relative cursor-grab"></div>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -217,7 +209,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -229,7 +221,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -241,7 +233,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -253,7 +245,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -265,7 +257,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -277,7 +269,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -289,7 +281,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -301,7 +293,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -313,7 +305,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -325,7 +317,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -337,7 +329,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -349,7 +341,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -361,7 +353,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -373,7 +365,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -385,7 +377,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -397,7 +389,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -409,7 +401,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -421,7 +413,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -433,7 +425,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -445,7 +437,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -457,7 +449,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -469,7 +461,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -481,7 +473,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -493,7 +485,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -505,7 +497,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -517,7 +509,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -529,7 +521,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -541,7 +533,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -553,7 +545,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -565,7 +557,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -577,7 +569,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -589,7 +581,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -601,7 +593,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -613,7 +605,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -625,7 +617,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -637,7 +629,7 @@
                             </svg>
                         </div>
                         <!-- item -->
-                        <div class="rounded-lg">
+                        <div class="rounded-lg item " data-appname="adobe">
                             <svg class="size-20" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <rect x="-9.15527e-05" y="0.222412" width="34.0475" height="34.5221" fill="url(#pattern0_189_1878)"></rect>
                                 <defs>
@@ -663,7 +655,7 @@
                         <p>اگر نرم افزار مورد نظرتون در لیست بالا نبود ، اینجا برامون بنویسین</p>
                     </div>
                     <div class="px-12">
-                        <textarea class="w-full border-r border-gray-700 text-xl" name="" id="" placeholder=""></textarea>
+                        <textarea class="w-full border-r border-gray-700 text-xl" name="" id="textbox" placeholder=""></textarea>
                     </div>
                 </div>
             </div>
@@ -672,64 +664,97 @@
          <!-- submit -->
           <section class="w-full">
             <div class="flex justify-center py-8 gap-x-4 text-white" dir="rtl">
-                <button class="px-6 py-2 bg-color-base rounded-lg cursor-pointer">ثبت </button>
+                <button class="px-6 py-2 bg-color-base rounded-lg cursor-pointer" id="submit">ثبت </button>
                 <button class="px-6 py-2 bg-color-base rounded-lg cursor-pointer">سرویس جدید</button>
             </div>
           </section>
     </main>
-
+    
     <script src="assets/jquery/jquury3.7.1.min.js"></script>
+    <script src="assets/datepicker/script.js"></script>
+    <script src="assets/scripts/scripts.js"></script>
     <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        //careat a object for send data
+        let form = {
+            "services" : [],
+            "apps" : [],
+            "textbox" : ""
+        };
+        //add apps to form data
+        $(".items .item").on("click" , (e)=>{
+            $(e.currentTarget).toggleClass("active-select")
+            addAppsToFrom();
+        })
+        function addAppsToFrom(){
+            form.apps = []
+            $(".active-select").each((i , elem) => {
+                form.apps[i] = elem.dataset.appname
+            })
+        }
+        //add text to form data
+        $("#textbox").on("change" , ()=>{
+            form.textbox = $("#textbox").val();
+        })
+        //add sevices to form data
+        $(".service").each((i , elem) =>{
+            form.services[i] = elem.dataset.service 
+        })
+        //send data
+        const UrlDestination = "";
+        $("#submit").on("click" , ()=>{
+            $.post(UrlDestination , JSON.stringify(form) , function(){return true;})
+        })
+
         //show date
         let days = ['یکشنبه', 'دوشنبه', 'سه شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه'];
         let d = new Date();
         let date = d.toLocaleDateString('fa-IR');
         $("header #day").text(days[d.getDay()]);
         $("header #date").text(date);
+        
+        //custome scroll box
+        const container = document.querySelector(".scroll-container");
+        const content = document.querySelector(".content");
+        const thumb = document.querySelector(".thumb");
+        const scrollbar = document.querySelector(".custom-scrollbar");
+        //change it , if scroll-height increase (for design)
+        const value = 182 ;
+        
+        function updateThumbPosition() {
+            let scrollRatio = content.scrollTop / (content.scrollHeight - content.clientHeight );
+            let thumbTop = scrollRatio * ((container.clientHeight - value) - thumb.clientHeight);
+            thumb.style.top = thumbTop + "px";
+        }
 
-        document.addEventListener("DOMContentLoaded", function () {
+        content.addEventListener("scroll", updateThumbPosition);
+        let isDragging = false;
+        let startY, startScrollTop;
 
-            //کانتینر اصلی
-            const container = document.querySelector(".scroll-container");
-            const content = document.querySelector(".content");
-            const thumb = document.querySelector(".thumb");
-            const scrollbar = document.querySelector(".custom-scrollbar");
-            //change it , if scroll-height increase (for design)
-            const value = 182 ;
-
-            // محاسبه نسبت بین اسکرول و دسته اسکرول سفارشی
-            function updateThumbPosition() {
-                let scrollRatio = content.scrollTop / (content.scrollHeight - content.clientHeight );
-                let thumbTop = scrollRatio * ((container.clientHeight - value) - thumb.clientHeight);
-                thumb.style.top = thumbTop + "px";
-            }
-
-            // حرکت دسته اسکرول با اسکرول محتوا
-            content.addEventListener("scroll", updateThumbPosition);
-
-            // درگ کردن دسته اسکرول
-            let isDragging = false;
-            let startY, startScrollTop;
-
-            thumb.addEventListener("mousedown", (e) => {
-                isDragging = true;
-                startY = e.clientY;
-                startScrollTop = content.scrollTop;
-                document.body.style.userSelect = "none"; // جلوگیری از انتخاب متن
-            });
-
-            document.addEventListener("mousemove", (e) => {
-                if (!isDragging) return;
-                let deltaY = e.clientY - startY;
-                let scrollAmount = (deltaY / container.clientHeight) * content.scrollHeight;
-                content.scrollTop = startScrollTop + scrollAmount;
-            });
-
-            document.addEventListener("mouseup", () => {
-                isDragging = false;
-                document.body.style.userSelect = "auto";
-            });
+        thumb.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            startY = e.clientY;
+            startScrollTop = content.scrollTop;
+            document.body.style.userSelect = "none";
         });
+
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            let deltaY = e.clientY - startY;
+            let scrollAmount = (deltaY / container.clientHeight) * content.scrollHeight;
+            content.scrollTop = startScrollTop + scrollAmount;
+        });
+
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            document.body.style.userSelect = "auto";
+        });
+
+    })
+
+    
     </script>
 </body>
 
